@@ -5,33 +5,33 @@ import "./Forms.css";
 
 const Forms = () => {
 
-  const Inputs = {
-    Fields: {
-      key: [0, 1, 2, 3],
-      type: ["email", "tel", "text", "text"],
-      // onChangeHandlers: [
-      //   { name: handleEmail },
-      //   { name: handlePhone },
-      //   { name: handleOrganization },
+  // const Inputs = {
+  //   Fields: {
+  //     key: [0, 1, 2, 3],
+  //     type: ["email", "tel", "text", "text"],
+  //     // onChangeHandlers: [
+  //     //   { name: handleEmail },
+  //     //   { name: handlePhone },
+  //     //   { name: handleOrganization },
 
-      //   { name: handleZip },
-      // ],
-      value: [email , phone ,  organization ,  zip ],
+  //     //   { name: handleZip },
+  //     // ],
+  //     value: [email , phone ,  organization ,  zip ],
 
-      name: ["email", "phone", "orgName", "zip"],
-      id: ["email", "phone", "orgName", "zip"],
-      placeholder: ["Email", "Phone(xxx)(xxx-xxxx)", "Organization Name"],
-      pattern: ["", "[0-9]{3}-[0-9]{3}-[0-9]{4}", "", "[0-9]{5}"],
-      inputmode: ["", "numeric", "", "numeric"],
-      error: [
-        { showEmailError },
-        { showPhoneError },
-        { showOrgError },
-        { showZipError },
-      ],
-    },
-  };
-  let answers = [];
+  //     name: ["email", "phone", "orgName", "zip"],
+  //     id: ["email", "phone", "orgName", "zip"],
+  //     placeholder: ["Email", "Phone(xxx)(xxx-xxxx)", "Organization Name"],
+  //     pattern: ["", "[0-9]{3}-[0-9]{3}-[0-9]{4}", "", "[0-9]{5}"],
+  //     inputmode: ["", "numeric", "", "numeric"],
+  //     error: [
+  //       { showEmailError },
+  //       { showPhoneError },
+  //       { showOrgError },
+  //       { showZipError },
+  //     ],
+  //   },
+  // };
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -40,18 +40,78 @@ const Forms = () => {
   const [zip, setZip] = useState("");
   const [patient, setPatient] = useState("");
   const [physician, setPhysician] = useState("");
+
+
+  const [showNameError, setShowNameError] = useState(false);
+  const [showEmailError, setShowEmailError] = useState(false);
+  const [showPhoneError, setShowPhoneError] = useState(false);
+  const [showOrgError, setShowOrgError] = useState(false);
+  const [showZipError, setShowZipError] = useState(false);
+  const [showPatientError, setShowPatientError] = useState(false);
+  const [showPhysicianError, setShowPhysicianError] = useState(false);
+
+
+  let Fields = [
+    {
+      key:0,
+      type: "email",
+      value: email,
+      name: "email",
+      id: "email",
+      placeholder: "Email",
+      pattern: "",
+      inputmode: "",
+      error: showEmailError,
+      
+    },
+    {
+      key:1,
+      type: "tel",
+      value: phone,
+      name: "phone",
+      id: "phone",
+      placeholder: "Phone(xxx)(xxx-xxxx)",
+      pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}",
+      inputmode: "numeric",
+      error: showPhoneError,
+    },
+    {
+      key:2,
+      type: "text",
+      value: organization,
+      name: "orgName",
+      id: "orgName",
+      placeholder: "Organization Name",
+      pattern: "",
+      inputmode: "",
+      error: showOrgError,
+    },
+    {
+      key:3,
+      type: "text",
+      value: zip,
+      name: "zip",
+      id: "zip",
+      placeholder: "Zip Code",
+      pattern: "[0-9]{5}",
+      inputmode: "numeric",
+      error: showZipError,
+    },
+  ];
+  
+  
+  
+  
+  
   const onSubmit = (e) => {
     e.preventDefault();
     alert("ok");
     const isValid = isEnabled();
-    // console.log(answers);
+    
 
   };
   const isEnabled = () => {
-    // if (answers.length === 8) {
-    //   return true;
-    // }
-    // return false;
+    
     let isValid = true;
 
     if (!showNameError || !showEmailError || !showPhoneError || !showZipError || !showOrgError || !showPatientError || !showPhysicianError) {
@@ -74,7 +134,7 @@ const Forms = () => {
       console.log("empty");
       setShowNameError(true);
     } else {
-      answers.push(firstName);
+      
       setShowNameError(false);
     }
   };
@@ -87,7 +147,7 @@ const Forms = () => {
       console.log("empty");
       setShowNameError(true);
     } else {
-      answers.push(lastName);
+     
       setShowNameError(false);
     }
   };
@@ -100,7 +160,7 @@ const Forms = () => {
       console.log("empty");
       setShowEmailError(true);
     } else {
-      answers.push(email);
+      
       setShowEmailError(false);
     }
   };
@@ -113,7 +173,7 @@ const Forms = () => {
       console.log("empty");
       setShowPhoneError(true);
     } else {
-      answers.push(phone);
+      
       setShowPhoneError(false);
     }
   };
@@ -126,7 +186,7 @@ const Forms = () => {
       console.log("empty");
       setShowZipError(true);
     } else {
-      answers.push(zip);
+      
       setShowZipError(false);
     }
   };
@@ -139,7 +199,7 @@ const Forms = () => {
       console.log("empty");
       setShowOrgError(true);
     } else {
-      answers.push(organization);
+      
       setShowOrgError(false);
     }
   };
@@ -152,7 +212,7 @@ const Forms = () => {
       console.log("empty");
       setShowPatientError(true);
     } else {
-      answers.push(patient);
+      
       setShowPatientError(false);
     }
   };
@@ -165,18 +225,12 @@ const Forms = () => {
       console.log("empty");
       setShowPhysicianError(true);
     } else {
-      answers.push(physician);
+      
       
       setShowPhysicianError(false);
     }
   };
-  const [showNameError, setShowNameError] = useState(false);
-  const [showEmailError, setShowEmailError] = useState(false);
-  const [showPhoneError, setShowPhoneError] = useState(false);
-  const [showOrgError, setShowOrgError] = useState(false);
-  const [showZipError, setShowZipError] = useState(false);
-  const [showPatientError, setShowPatientError] = useState(false);
-  const [showPhysicianError, setShowPhysicianError] = useState(false);
+  
   
   return (
     <div className="main">
@@ -209,27 +263,30 @@ const Forms = () => {
           </div>
           <div style={{ color: "red" }}>{showNameError && errorField}</div>
           
-          {Inputs.Fields.key &&
-            Inputs.Fields.key.map((key) => {
+
+
+          {Fields.key &&
+            Fields.key.map((key) => {
               return (
                 <div className="contact-item">
                   <input
-                    type={Inputs.Fields.type[key]}
+                    type={Fields.type[key]}
                     // onChange={(event) => { Inputs.Fields.onChangeHandlers[key].name } }
-                    value={Inputs.Fields.value[key]}
+                    value={Fields.value[key]}
                     autoComplete="off"
-                    name={Inputs.Fields.name[key]}
-                    id={Inputs.Fields.id[key]}
-                    placeholder={Inputs.Fields.placeholder[key]}
+                    name={Fields.name[key]}
+                    id={Fields.id[key]}
+                    placeholder={Fields.placeholder[key]}
                     required
                   />
 
-                  <div style={{ color: "red" }}>{Inputs.Fields.error[key] && errorField}</div>
+                  <div style={{ color: "red" }}>{Fields.error[key] && errorField}</div>
                 </div>
               );
             }
             )
-          }
+            }
+            
 
 
          
