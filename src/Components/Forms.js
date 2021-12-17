@@ -1,37 +1,7 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import "./Forms.css";
 
-
-
 const Forms = () => {
-
-  // const Inputs = {
-  //   Fields: {
-  //     key: [0, 1, 2, 3],
-  //     type: ["email", "tel", "text", "text"],
-  //     // onChangeHandlers: [
-  //     //   { name: handleEmail },
-  //     //   { name: handlePhone },
-  //     //   { name: handleOrganization },
-
-  //     //   { name: handleZip },
-  //     // ],
-  //     value: [email , phone ,  organization ,  zip ],
-
-  //     name: ["email", "phone", "orgName", "zip"],
-  //     id: ["email", "phone", "orgName", "zip"],
-  //     placeholder: ["Email", "Phone(xxx)(xxx-xxxx)", "Organization Name"],
-  //     pattern: ["", "[0-9]{3}-[0-9]{3}-[0-9]{4}", "", "[0-9]{5}"],
-  //     inputmode: ["", "numeric", "", "numeric"],
-  //     error: [
-  //       { showEmailError },
-  //       { showPhoneError },
-  //       { showOrgError },
-  //       { showZipError },
-  //     ],
-  //   },
-  // };
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -41,8 +11,8 @@ const Forms = () => {
   const [patient, setPatient] = useState("");
   const [physician, setPhysician] = useState("");
 
-
-  const [showNameError, setShowNameError] = useState(false);
+  const [showFirstNameError, setShowFirstNameError] = useState(false);
+  const [showLastNameError, setShowLastNameError] = useState(false);
   const [showEmailError, setShowEmailError] = useState(false);
   const [showPhoneError, setShowPhoneError] = useState(false);
   const [showOrgError, setShowOrgError] = useState(false);
@@ -50,92 +20,40 @@ const Forms = () => {
   const [showPatientError, setShowPatientError] = useState(false);
   const [showPhysicianError, setShowPhysicianError] = useState(false);
 
-
-  let Fields = [
-    {
-      key:0,
-      type: "email",
-      value: email,
-      name: "email",
-      id: "email",
-      placeholder: "Email",
-      pattern: "",
-      inputmode: "",
-      error: showEmailError,
-      
-    },
-    {
-      key:1,
-      type: "tel",
-      value: phone,
-      name: "phone",
-      id: "phone",
-      placeholder: "Phone(xxx)(xxx-xxxx)",
-      pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}",
-      inputmode: "numeric",
-      error: showPhoneError,
-    },
-    {
-      key:2,
-      type: "text",
-      value: organization,
-      name: "orgName",
-      id: "orgName",
-      placeholder: "Organization Name",
-      pattern: "",
-      inputmode: "",
-      error: showOrgError,
-    },
-    {
-      key:3,
-      type: "text",
-      value: zip,
-      name: "zip",
-      id: "zip",
-      placeholder: "Zip Code",
-      pattern: "[0-9]{5}",
-      inputmode: "numeric",
-      error: showZipError,
-    },
-  ];
-  
-  
-  
-  
-  
   const onSubmit = (e) => {
     e.preventDefault();
     alert("ok");
     const isValid = isEnabled();
-    
-
   };
   const isEnabled = () => {
-    
     let isValid = true;
 
-    if (!showNameError || !showEmailError || !showPhoneError || !showZipError || !showOrgError || !showPatientError || !showPhysicianError) {
+    if (
+      !showFirstNameError ||
+      !showLastNameError ||
+      !showEmailError ||
+      !showPhoneError ||
+      !showZipError ||
+      !showOrgError ||
+      !showPatientError ||
+      !showPhysicianError
+    ) {
       isValid = false;
     }
     return isValid;
+  };
 
-  }
-  
-
-  
   const errorField = "This field can't be empty";
-
 
   const handleFirstName = (event) => {
     event.preventDefault();
     setFirstName(event.target.value);
-    console.log(event.target.value);  
-    if (firstName.trim().length===0) {      
+    console.log(event.target.value);
+    if (event.target.value.length === 0) {
       console.log("empty");
-      setShowNameError(true);
+      setShowFirstNameError(true);
     } else {
-      
-      setShowNameError(false);
+      setShowFirstNameError(false);
     }
   };
 
@@ -143,12 +61,11 @@ const Forms = () => {
     event.preventDefault();
     setLastName(event.target.value);
     console.log(event.target.value);
-    if (lastName.trim().length === 0) {
+    if (event.target.value.trim().length === 0) {
       console.log("empty");
-      setShowNameError(true);
+      setShowLastNameError(true);
     } else {
-     
-      setShowNameError(false);
+      setShowLastNameError(false);
     }
   };
 
@@ -156,11 +73,10 @@ const Forms = () => {
     event.preventDefault();
     setEmail(event.target.value);
     console.log(event.target.value);
-    if (email.trim().length < 5) {
+    if (event.target.value.trim().length < 5) {
       console.log("empty");
       setShowEmailError(true);
     } else {
-      
       setShowEmailError(false);
     }
   };
@@ -169,11 +85,10 @@ const Forms = () => {
     event.preventDefault();
     setPhone(event.target.value);
     console.log(event.target.value);
-    if (phone.trim().length < 9) {
+    if (event.target.value.trim().length < 9) {
       console.log("empty");
       setShowPhoneError(true);
     } else {
-      
       setShowPhoneError(false);
     }
   };
@@ -182,11 +97,10 @@ const Forms = () => {
     event.preventDefault();
     setZip(event.target.value);
     console.log(event.target.value);
-    if (zip.trim().length < 5) {
+    if (event.target.value.trim().length < 5) {
       console.log("empty");
       setShowZipError(true);
     } else {
-      
       setShowZipError(false);
     }
   };
@@ -195,11 +109,10 @@ const Forms = () => {
     event.preventDefault();
     setOrganization(event.target.value);
     console.log(event.target.value);
-    if (organization.trim().length < 5) {
+    if (event.target.value.trim().length < 5) {
       console.log("empty");
       setShowOrgError(true);
     } else {
-      
       setShowOrgError(false);
     }
   };
@@ -208,88 +121,140 @@ const Forms = () => {
     event.preventDefault();
     setPatient(event.target.value);
     console.log(event.target.value);
-    if (patient==="") {
+    if (patient === "") {
       console.log("empty");
       setShowPatientError(true);
     } else {
-      
       setShowPatientError(false);
     }
   };
 
   const handlePhysician = (event) => {
-    
     setPhysician(event.target.value);
     console.log(event.target.value);
     if (physician === "") {
       console.log("empty");
       setShowPhysicianError(true);
     } else {
-      
-      
       setShowPhysicianError(false);
     }
   };
-  
-  
+
+  let Fields = [
+    {
+      key: 0,
+      type: "email",
+      value: email,
+      name: "email",
+      id: "email",
+      placeholder: "Email",
+      pattern: "",
+      inputmode: "",
+      error: showEmailError,
+      handler: handleEmail,
+    },
+    {
+      key: 1,
+      type: "tel",
+      value: phone,
+      name: "phone",
+      id: "phone",
+      placeholder: "Phone(xxx)(xxx-xxxx)",
+      pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}",
+      inputmode: "numeric",
+      error: showPhoneError,
+      handler: handlePhone,
+    },
+    {
+      key: 2,
+      type: "text",
+      value: organization,
+      name: "orgName",
+      id: "orgName",
+      placeholder: "Organization Name",
+      pattern: "",
+      inputmode: "",
+      error: showOrgError,
+      handler: handleOrganization,
+    },
+    {
+      key: 3,
+      type: "text",
+      value: zip,
+      name: "zip",
+      id: "zip",
+      placeholder: "Zip Code",
+      pattern: "[0-9]{5}",
+      inputmode: "numeric",
+      error: showZipError,
+      handler: handleZip,
+    },
+  ];
+
+  const Name = [
+    {
+      type: "text",
+      value: firstName,
+      name: "firstName",
+      id: "firstName",
+      placeholder: "First Name",
+      error: showFirstNameError,
+      handler: handleFirstName,
+    },
+    {
+      type: "text",
+      value: lastName,
+      name: "lastName",
+      id: "lastName",
+      placeholder: "Last Name",
+      error: showLastNameError,
+      handler: handleLastName,
+    },
+  ];
+
   return (
     <div className="main">
       <div className="testbox">
         <form onSubmit={onSubmit}>
-          <div className="name-item">
-            <>
-              <input
-                type="text"
-                onChange={(event) => handleFirstName(event)}
-                value={firstName}
-                autoComplete="off"
-                name="firstName"
-                id="firstName"
-                placeholder="First Name"
-                required
-              />
+          {Name.map((item) => {
+            return (
+              <div className="name-item">
+                <input
+                  type={item.type}
+                  onChange={item.handler}
+                  onFocus={item.handler}
+                  value={item.value}
+                  autoComplete="off"
+                  name={item.name}
+                  id={item.id}
+                  placeholder={item.placeholder}
+                  required
+                />
+                <div style={{ color: "red" }}>{item.error && errorField}</div>
+              </div>
+            );
+          })}
 
-              <input
-                type="text"
-                onChange={(event) => handleLastName(event)}
-                value={lastName}
-                autoComplete="off"
-                name="lastName"
-                id="lastName"
-                placeholder="Last Name"
-                required
-              />
-            </>
-          </div>
-          <div style={{ color: "red" }}>{showNameError && errorField}</div>
-          
+          {Fields.map((item) => {
+            return (
+              <div className="contact-item">
+                <input
+                  type={item.type}
+                  onChange={item.handler}
+                  onFocus={item.handler}
+                  value={item.value}
+                  autoComplete="off"
+                  name={item.name}
+                  id={item.id}
+                  placeholder={item.placeholder}
+                  required
+                />
 
+                <div style={{ color: "red" }}>{item.error && errorField}</div>
+              </div>
+            );
+          })}
 
-          {Fields.key &&
-            Fields.key.map((key) => {
-              return (
-                <div className="contact-item">
-                  <input
-                    type={Fields.type[key]}
-                    // onChange={(event) => { Inputs.Fields.onChangeHandlers[key].name } }
-                    value={Fields.value[key]}
-                    autoComplete="off"
-                    name={Fields.name[key]}
-                    id={Fields.id[key]}
-                    placeholder={Fields.placeholder[key]}
-                    required
-                  />
-
-                  <div style={{ color: "red" }}>{Fields.error[key] && errorField}</div>
-                </div>
-              );
-            }
-            )
-            }
-            
-
-
-         
           <div>
             <label htmlFor="patient">
               <p>Are you a patient?</p>
